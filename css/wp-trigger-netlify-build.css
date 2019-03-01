@@ -1,0 +1,8 @@
+.toplevel_page_wp-trigger-netlify-build form {
+  background: white;
+  padding: 20px;
+  margin: 0 20px 0 0;
+}
+.toplevel_page_wp-trigger-netlify-build .notice {
+  margin: 20px 20px 20px 0;
+}

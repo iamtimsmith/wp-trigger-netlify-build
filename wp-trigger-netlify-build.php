@@ -12,30 +12,72 @@
 /**
  * Create Admin Panel
  */
-function plugin_setup_menu() {
-  add_menu_page( 'WP Trigger Netlify Build', 'Netlify Build', 'manage_options', 'wp-trigger-netlify-build', 'settings_page', netlify_icon() );
+function wp_trigger_netlify_build_setup_menu() {
+  add_menu_page( 'WP Trigger Netlify Build', 'Netlify Build', 'manage_options', 'wp-trigger-netlify-build', 'wp_trigger_netlify_build_options_page', netlify_icon() );
 }
-add_action( 'admin_menu', 'plugin_setup_menu');
+add_action( 'admin_menu', 'wp_trigger_netlify_build_setup_menu');
 
 /**
- * Style Netlify icon in admin
+ * Create Settings
  */
-function admin_icon_styles() {
-  echo '<style>
-    #toplevel_page_wp-trigger-netlify-build .wp-menu-image > img {
-      height:25px;
-      padding-top:5px;
-    }
-  </style>';
+function wp_trigger_netlify_build_settings_init() {
+  register_setting('wp_trigger_netlify_build', 'wp_trigger_netlify_build_settings');
+  add_settings_section(
+    'wp_trigger_netlify_build_section',
+    __( '', 'wordpress' ),
+    '',
+    'wp_trigger_netlify_build'
+  );
+  add_settings_field(
+    'wp_trigger_netlify_build_webhook_url',
+    __('Netlify Webhook URL', 'wordpress'),
+    'wp_trigger_netlify_build_webhook_url_render',
+    'wp_trigger_netlify_build',
+    'wp_trigger_netlify_build_section'
+  );
 }
-add_action('admin_head', 'admin_icon_styles');
+add_action( 'admin_init', 'wp_trigger_netlify_build_settings_init' );
+
+
+function wp_trigger_netlify_build_webhook_url_render() {
+  $options = get_option( 'wp_trigger_netlify_build_settings' );
+  ?>
+  <input type='text' name='wp_trigger_netlify_build_settings[wp_trigger_netlify_build_webhook_url]' value='<?php echo $options['wp_trigger_netlify_build_webhook_url']; ?>' class="regular-text">
+  <span class="description"><?php esc_attr_e( 'The URL provided by Netlify for a custom webhook', 'WpAdminStyle' ); ?></span><br>
+  <?php
+}
+
+function wp_trigger_netlify_build_options_page() {
+  ?>
+  <h1>Netlify Settings</h1>
+  <p>Set up your plugin to work with your Netlify webhooks.</p>
+  <form action='options.php' method='post'>
+    <?php
+    settings_fields( 'wp_trigger_netlify_build' );
+    do_settings_sections( 'wp_trigger_netlify_build' );
+    submit_button();
+    ?>
+  </form>
+  <?php
+}
+
+function wp_trigger_netlify_build_notice__success() {
+  ?>
+  <div class="notice notice-success">
+      <p><?php _e( 'Your Settings Have Been Updated!', 'sample-text-domain' ); ?></p>
+  </div>
+  <?php
+}
+add_action( 'admin_notices', 'wp_trigger_netlify_build_notice__success' );
 
  /**
  * Fire Webhook to build Netlify
  */
 function wordpress_netlify_enqueue($hook) {
+  $options = get_option( 'wp_trigger_netlify_build_settings' );
   wp_enqueue_script( 'wp-trigger-netlify-build', plugin_dir_url( __FILE__ ) . '/js/wp-trigger-netlify-build.js', array(), '20190228', true );
   wp_enqueue_style( 'wp-trigger-netlify-build-styles', plugin_dir_url( __FILE__ ) . '/css/wp-trigger-netlify-build.css');
+  wp_localize_script( 'wp-trigger-netlify-build', 'wpTriggerNetlifyBuildVars', $options['wp_trigger_netlify_build_webhook_url'] );
 }
 add_action( 'admin_enqueue_scripts', 'wordpress_netlify_enqueue' );
 
