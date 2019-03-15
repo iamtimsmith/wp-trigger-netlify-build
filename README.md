@@ -18,12 +18,9 @@ Next you have to install and activate the plugin within the wordpress admin. Onc
 
 ## Screenshots
 
-<figure align="center">
+<p align="left">
   <img src="./images/screenshot1.png" alt="Settings page in WordPress admin" width="350">
-  <figcaption>Settings page in WordPress admin</figcaption>
-</figure>
-
-<figure align="center">
+</p>
+<p align="left">
   <img src="./images/screenshot2.png" alt="Dashboard with Netlify status" width="350">
-  <figcaption>Dashboard with Netlify status</figcaption>
-</figure>
+</p>
