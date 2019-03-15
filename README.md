@@ -11,3 +11,13 @@ git clone https://github.com/iamtimsmith/wp-trigger-netlify-build.git
 ```
 
 Next you have to install and activate the plugin within the wordpress admin. Once activated, grab the webhook url from Netlify and enter it into the plugin settings page. Next you can grab the status image url and link url to drop into the settings which will provide the netlify status banner in the WordPress dashboard.
+
+## Screenshots
+
+![Settings page in WordPress admin](./images/screenshot1.png)
+Settings page in WordPress admin
+
+<br />
+
+![Dashboard with Netlify status](./images/screenshot2.png)
+Dashboard with Netlify status
