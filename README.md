@@ -1,3 +1,5 @@
+<img src="./images/logomark.png" style="max-width:150px; display:block; margin:0 auto;">
+
 # WP Trigger Netlify Build
 
 This plugin was built to make it easier for developers to use WordPress as a headless CMS. It makes it a breeze to trigger builds in [Netlify](https://www.netlify.com/) whenever content is created or updated.
@@ -14,10 +16,12 @@ Next you have to install and activate the plugin within the wordpress admin. Onc
 
 ## Screenshots
 
-![Settings page in WordPress admin](./images/screenshot1.png)
-Settings page in WordPress admin
+<figure>
+  <img src="./images/screenshot1.png" alt="Settings page in WordPress admin">
+  <figcaption>Settings page in WordPress admin</figcaption>
+</figure>
 
-<br />
-
-![Dashboard with Netlify status](./images/screenshot2.png)
-Dashboard with Netlify status
+<figure>
+  <img src="./images/screenshot2.png" alt="Dashboard with Netlify status">
+  <figcaption>Dashboard with Netlify status</figcaption>
+</figure>
