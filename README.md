@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./images/logomark.png" width="150">
+  <img src="./images/banner.png" alt="WP Trigger Netlify Build">
 </p>
 
 # WP Trigger Netlify Build
