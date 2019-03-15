@@ -1,4 +1,6 @@
-<img src="./images/logomark.png" style="max-width:150px; display:block; margin:0 auto;">
+<p align="center">
+  <img src="./images/logomark.png" width="150">
+</p>
 
 # WP Trigger Netlify Build
 
@@ -16,12 +18,12 @@ Next you have to install and activate the plugin within the wordpress admin. Onc
 
 ## Screenshots
 
-<figure>
-  <img src="./images/screenshot1.png" alt="Settings page in WordPress admin">
+<figure align="center">
+  <img src="./images/screenshot1.png" alt="Settings page in WordPress admin" width="350">
   <figcaption>Settings page in WordPress admin</figcaption>
 </figure>
 
-<figure>
-  <img src="./images/screenshot2.png" alt="Dashboard with Netlify status">
+<figure align="center">
+  <img src="./images/screenshot2.png" alt="Dashboard with Netlify status" width="350">
   <figcaption>Dashboard with Netlify status</figcaption>
 </figure>
