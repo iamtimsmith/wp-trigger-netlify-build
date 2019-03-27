@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: WP Trigger Netlify Build
- * Plugin URI: http://www.mywebsite.com/my-first-plugin
+ * Plugin URI: https://github.com/iamtimsmith/wp-trigger-netlify-build
  * Description: A plugin which takes a webhook url and triggers a build for a netlify site
  * Version: 1.0
  * Author: Tim Smith
