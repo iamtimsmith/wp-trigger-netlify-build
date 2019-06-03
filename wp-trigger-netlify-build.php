@@ -109,7 +109,7 @@ function wordpress_netlify_enqueue($hook) {
   wp_enqueue_style( 'wp-trigger-netlify-build-styles', plugin_dir_url( __FILE__ ) . '/css/wp-trigger-netlify-build.css');
   wp_localize_script( 'wp-trigger-netlify-build', 'wpTriggerNetlifyBuildVars', $options['wp_trigger_netlify_build_webhook_url'] );
 }
-add_action( 'admin_enqueue_scripts', 'wordpress_netlify_enqueue' );
+add_action( 'save_post', 'wordpress_netlify_enqueue' );
 
 /**
  * Create Dashboard Widget for netlify deploy status
