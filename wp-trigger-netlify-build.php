@@ -92,13 +92,15 @@ function wp_trigger_netlify_build_options_page() {
 }
 
 function wp_trigger_netlify_build_notice__success() {
-  ?>
-  <div class="notice notice-success">
-      <p><?php _e( 'Your Settings Have Been Updated!', 'sample-text-domain' ); ?></p>
-  </div>
-  <?php
+    ?>
+    <?php if (isset($_GET['settings-updated'])) : ?>
+        <div class="notice notice-success">
+            <p><?php _e('Your Settings Have Been Updated!', 'WpAdminStyle'); ?></p>
+        </div>
+    <?php endif; ?>
+<?php
 }
-add_action( 'admin_notices', 'wp_trigger_netlify_build_notice__success' );
+add_action('admin_notices', 'wp_trigger_netlify_build_notice__success');
 
  /**
  * Fire Webhook to build Netlify
