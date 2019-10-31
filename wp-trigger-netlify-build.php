@@ -122,11 +122,25 @@ function wp_trigger_netlify_build_dashboard_widgets() {
 add_action('wp_dashboard_setup', 'wp_trigger_netlify_build_dashboard_widgets');
 
 function wp_trigger_netlify_build_dashboard_status() {
-  $options = get_option( 'wp_trigger_netlify_build_settings' );
-  $markup .= '<a href="' . $options['wp_trigger_netlify_build_status_link'] . '" target="_blank" rel="noopener noreferrer">';
-  $markup .= '<img src="' . $options['wp_trigger_netlify_build_status_image'] . '" alt="Netlify Status" />';
-  $markup .= '</a>';
-  echo $markup;
+    $options = get_option('wp_trigger_netlify_build_settings');
+    $markup = '';
+    $markup .= '<a href="' . $options['wp_trigger_netlify_build_status_link'] . '" target="_blank" rel="noopener noreferrer">';
+    $markup .= '<img src="' . $options['wp_trigger_netlify_build_status_image'] . '" alt="Netlify Status" />';
+    $markup .= '</a>';
+    $markup .= '<h1>Trigger a Netlify build manually</h1>';
+    $markup .= '<br>';
+    $markup .= '<button id="manualNetlifyBuildTrigger" class="button button-primary button-large">Trigger netlify build</button>';
+    $markup .= '<script>jQuery("#manualNetlifyBuildTrigger").on("click", function(e) { 
+        jQuery.ajax({ 
+            type: "POST", 
+            url: "' . $options['wp_trigger_netlify_build_webhook_url'] . '", 
+            success: function(d) { 
+                console.log(d);
+                location.reload();
+            }
+        }); 
+    });</script>';
+    echo $markup;
 }
 
 /**
