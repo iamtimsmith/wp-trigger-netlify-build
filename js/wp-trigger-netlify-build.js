@@ -1,11 +1,11 @@
 jQuery(document).ready(
-  (function($) {
+  (function ($) {
     // event handler for clicking the link button
-    $("#publish, #original_publish").on("click", function(e) {
+    $("#publish, #original_publish, .row-actions .trash, #delete-action").on("click", function (e) {
       $.ajax({
         type: "POST",
         url: wpTriggerNetlifyBuildVars,
-        success: function(d) {
+        success: function (d) {
           console.log(d);
         }
       });
