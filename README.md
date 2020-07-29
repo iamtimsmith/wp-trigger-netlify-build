@@ -24,3 +24,16 @@ Next you have to install and activate the plugin within the wordpress admin. Onc
 <p align="left">
   <img src="./images/screenshot2.png" alt="Dashboard with Netlify status" width="350">
 </p>
+
+## Contributors
+
+<div style="display:flex; justify-content: flex-start; align-items: center; flex-wrap: wrap;">
+  <figure style="text-align: center">
+    <img src="./images/iamtimsmith.jpeg" alt="iamtimsmith" style="width: 60px; border-radius: 100%;">
+    <figcaption>@iamtimsmith</figcaption>
+  </figure>
+  <figure style="text-align: center">
+    <img src="./images/mvaneijgen.jpg" alt="iamtimsmith" style="width: 60px; border-radius: 100%;">
+    <figcaption>@mvaneijgen</figcaption>
+  </figure>
+</div>
