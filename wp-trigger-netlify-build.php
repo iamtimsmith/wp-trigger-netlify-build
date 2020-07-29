@@ -123,6 +123,7 @@ add_action('wp_dashboard_setup', 'wp_trigger_netlify_build_dashboard_widgets');
 
 function wp_trigger_netlify_build_dashboard_status() {
   $options = get_option( 'wp_trigger_netlify_build_settings' );
+  $markup = '';
   $markup .= '<a href="' . $options['wp_trigger_netlify_build_status_link'] . '" target="_blank" rel="noopener noreferrer">';
   $markup .= '<img src="' . $options['wp_trigger_netlify_build_status_image'] . '" alt="Netlify Status" />';
   $markup .= '</a>';
