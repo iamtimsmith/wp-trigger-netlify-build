@@ -27,13 +27,5 @@ Next you have to install and activate the plugin within the wordpress admin. Onc
 
 ## Contributors
 
-<div style="display:flex; justify-content: flex-start; align-items: center; flex-wrap: wrap;">
-  <figure style="text-align: center">
-    <img src="./images/iamtimsmith.jpeg" alt="iamtimsmith" style="width: 60px; border-radius: 100%;">
-    <figcaption>@iamtimsmith</figcaption>
-  </figure>
-  <figure style="text-align: center">
-    <img src="./images/mvaneijgen.jpg" alt="iamtimsmith" style="width: 60px; border-radius: 100%;">
-    <figcaption>@mvaneijgen</figcaption>
-  </figure>
-</div>
+<img src="./images/iamtimsmith.png" alt="@iamtimsmith" height="60">
+<img src="./images/mvaneijgen.png" alt="@mvaneijgen" height="60">
