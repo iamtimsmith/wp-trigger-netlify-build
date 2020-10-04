@@ -55,6 +55,8 @@ add_action( 'admin_init', 'wp_trigger_netlify_build_settings_init' );
 
 function wp_trigger_netlify_build_webhook_url_render() {
   $options = get_option( 'wp_trigger_netlify_build_settings' );
+  $options ? false : $options['wp_trigger_netlify_build_webhook_url'] = "";
+
   ?>
   <input type='text' name='wp_trigger_netlify_build_settings[wp_trigger_netlify_build_webhook_url]' value='<?php echo $options['wp_trigger_netlify_build_webhook_url']; ?>' class="regular-text">
   <span class="description"><?php esc_attr_e( 'The URL provided by Netlify for a custom webhook', 'WpAdminStyle' ); ?></span><br>
@@ -63,6 +65,8 @@ function wp_trigger_netlify_build_webhook_url_render() {
 
 function wp_trigger_netlify_build_status_image_render() {
   $options = get_option( 'wp_trigger_netlify_build_settings' );
+  $options ? false : $options['wp_trigger_netlify_build_status_image'] = "";
+
   ?>
   <input type='text' name='wp_trigger_netlify_build_settings[wp_trigger_netlify_build_status_image]' value='<?php echo $options['wp_trigger_netlify_build_status_image']; ?>' class="regular-text">
   <span class="description"><?php esc_attr_e( 'The URL provided by Netlify for the image that shows site status', 'WpAdminStyle' ); ?></span><br>
@@ -71,6 +75,8 @@ function wp_trigger_netlify_build_status_image_render() {
 
 function wp_trigger_netlify_build_status_link_render() {
   $options = get_option( 'wp_trigger_netlify_build_settings' );
+  $options ? false : $options['wp_trigger_netlify_build_status_link'] = "";
+
   ?>
   <input type='text' name='wp_trigger_netlify_build_settings[wp_trigger_netlify_build_status_link]' value='<?php echo $options['wp_trigger_netlify_build_status_link']; ?>' class="regular-text">
   <span class="description"><?php esc_attr_e( 'The URL provided by Netlify for the link to the site status', 'WpAdminStyle' ); ?></span><br>
@@ -109,7 +115,10 @@ function wordpress_netlify_enqueue($hook) {
   $options = get_option( 'wp_trigger_netlify_build_settings' );
   wp_enqueue_script( 'wp-trigger-netlify-build', plugin_dir_url( __FILE__ ) . '/js/wp-trigger-netlify-build.js', array(), '20190228', true );
   wp_enqueue_style( 'wp-trigger-netlify-build-styles', plugin_dir_url( __FILE__ ) . '/css/wp-trigger-netlify-build.css');
-  wp_localize_script( 'wp-trigger-netlify-build', 'wpTriggerNetlifyBuildVars', $options['wp_trigger_netlify_build_webhook_url'] );
+
+  if($options){
+    wp_localize_script( 'wp-trigger-netlify-build', 'wpTriggerNetlifyBuildVars', $options['wp_trigger_netlify_build_webhook_url'] );
+  }
 }
 add_action( 'admin_enqueue_scripts', 'wordpress_netlify_enqueue' );
 
@@ -155,15 +164,17 @@ function netlify_icon() {
 function wp_trigger_netlify_build_admin_bar_status($admin_bar)
 {
     $options = get_option('wp_trigger_netlify_build_settings');
-    $netlifyStatus = '<img style="transform: translateY(5px)" src="' . $options['wp_trigger_netlify_build_status_image'] . '" alt="Netlify Status" />';
+    if($options){
+      $netlifyStatus = '<img style="transform: translateY(5px)" src="' . $options['wp_trigger_netlify_build_status_image'] . '" alt="Netlify Status" />';
 
-    $admin_bar->add_menu(array(
-        'id'    => 'netlifyStatus',
-        'title' => $netlifyStatus,
-        'href'  => $options['wp_trigger_netlify_build_status_link'],
-        'meta'  => array(
-            'title' => __('Netlify status'),
-        ),
-    ));
+      $admin_bar->add_menu(array(
+          'id'    => 'netlifyStatus',
+          'title' => $netlifyStatus,
+          'href'  => $options['wp_trigger_netlify_build_status_link'],
+          'meta'  => array(
+              'title' => __('Netlify status'),
+          ),
+      ));
+    }
 }
 add_action('admin_bar_menu', 'wp_trigger_netlify_build_admin_bar_status', 10);
