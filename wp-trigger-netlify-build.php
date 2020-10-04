@@ -127,31 +127,36 @@ add_action( 'admin_enqueue_scripts', 'wordpress_netlify_enqueue' );
  */
 function wp_trigger_netlify_build_dashboard_widgets() {
   global $wp_meta_boxes;
-  
+
   wp_add_dashboard_widget('netlify_dashboard_status', 'Netlify Status', 'wp_trigger_netlify_build_dashboard_status');
 }
 add_action('wp_dashboard_setup', 'wp_trigger_netlify_build_dashboard_widgets');
 
 function wp_trigger_netlify_build_dashboard_status() {
     $options = get_option('wp_trigger_netlify_build_settings');
-    $markup = '';
-    $markup .= '<a href="' . $options['wp_trigger_netlify_build_status_link'] . '" target="_blank" rel="noopener noreferrer">';
-    $markup .= '<img src="' . $options['wp_trigger_netlify_build_status_image'] . '" alt="Netlify Status" />';
-    $markup .= '</a>';
-    $markup .= '<h1>Trigger a Netlify build manually</h1>';
-    $markup .= '<br>';
-    $markup .= '<button id="manualNetlifyBuildTrigger" class="button button-primary button-large">Trigger netlify build</button>';
-    $markup .= '<script>jQuery("#manualNetlifyBuildTrigger").on("click", function(e) { 
-        jQuery.ajax({ 
-            type: "POST", 
-            url: "' . $options['wp_trigger_netlify_build_webhook_url'] . '", 
-            success: function(d) { 
-                console.log(d);
-                location.reload();
-            }
-        }); 
-    });</script>';
-    echo $markup;
+
+    if($options){
+      $markup = '';
+      $markup .= '<a href="' . $options['wp_trigger_netlify_build_status_link'] . '" target="_blank" rel="noopener noreferrer">';
+      $markup .= '<img src="' . $options['wp_trigger_netlify_build_status_image'] . '" alt="Netlify Status" />';
+      $markup .= '</a>';
+      $markup .= '<h1>Trigger a Netlify build manually</h1>';
+      $markup .= '<br>';
+      $markup .= '<button id="manualNetlifyBuildTrigger" class="button button-primary button-large">Trigger netlify build</button>';
+      $markup .= '<script>jQuery("#manualNetlifyBuildTrigger").on("click", function(e) {
+          jQuery.ajax({
+              type: "POST",
+              url: "' . $options['wp_trigger_netlify_build_webhook_url'] . '",
+              success: function(d) {
+                  console.log(d);
+                  location.reload();
+              }
+          });
+      });</script>';
+      echo $markup;
+    }else{
+      echo "<p>Please update Netlify settings</p>";
+    }
 }
 
 /**
