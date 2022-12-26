@@ -120,7 +120,7 @@ function wordpress_netlify_enqueue($hook) {
     wp_localize_script( 'wp-trigger-netlify-build', 'wpTriggerNetlifyBuildVars', $options['wp_trigger_netlify_build_webhook_url'] );
   }
 }
-add_action( 'admin_enqueue_scripts', 'wordpress_netlify_enqueue' );
+add_action( 'save_post', 'wordpress_netlify_enqueue' );
 
 /**
  * Create Dashboard Widget for netlify deploy status
